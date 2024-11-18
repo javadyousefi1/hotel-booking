@@ -8,7 +8,9 @@ export default function RootLayout({
     return (
         <>
             <Header />
-            {children}
+            <section className="container mx-auto">
+                {children}
+            </section>
         </>
     );
 }

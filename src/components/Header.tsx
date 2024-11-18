@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/avatar"
 import {
     NavigationMenu,
-    NavigationMenuContent,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
@@ -24,7 +23,7 @@ export default function NavigationMenuDemo() {
             <Image src="/assets/images/logo.svg" width={100} height={20} alt="logo" className="object-cover" />
             {/* nav menu */}
             <NavigationMenu >
-                <NavigationMenuList>
+                <NavigationMenuList className="flex gap-x-4">
                     <NavigationMenuItem>
                         <Link href="/home" legacyBehavior passHref>
                             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
