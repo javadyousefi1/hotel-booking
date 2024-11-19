@@ -1,12 +1,15 @@
 "use client"
+import MapProvider from '@/context/MapProvider';
 import dynamic from 'next/dynamic';
 
-const Map = dynamic(() => import('../../../components/Map'), { ssr: false });
+const Test = dynamic(() => import('./Test'), { ssr: false });
 
 const Page = () => {
-    return (<>
-        <Map />
-    </>);
-}
+  return (
+    <MapProvider>
+      <Test />
+    </MapProvider>
+  );
+};
 
 export default Page;
