@@ -14,7 +14,7 @@ const Test = () => {
   }, [state.mapInstance, dispatch]);  // Run the effect only when the map instance is not initialized
 
   return (
-    <div ref={mapRef} style={{ height: "100vh" }}></div> // Ensure the map container has a size
+    <div ref={mapRef} key={mapRef} style={{ height: "100vh" }}></div> // Ensure the map container has a size
   );
 };
 

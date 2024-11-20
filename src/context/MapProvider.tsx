@@ -14,21 +14,26 @@ const INITIAL_STATE = {
 function reducer(state, action) {
   switch (action.type) {
     case "initialize-map":
+
+
+      var tl = new L()
+
+      tl.map(action.payload.current).setView([35.714548, 51.360095], 12);
+
       // If the map is already initialized, don't re-initialize
-      if (state.mapInstance) return state;
 
-      // Initialize the map only once
-      const map = L.map(action.payload.current).setView([35.714548, 51.360095], 12);
+      // // Initialize the map only once
+      // const map = L.map(action.payload.current).setView([35.714548, 51.360095], 12);
 
-      // Optionally add a tile layer
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
-      }).addTo(map);
+      // // Optionally add a tile layer
+      // L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      //   attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
+      // }).addTo(map);
 
       // Store the map instance in state
       return {
-        ...state,
-        mapInstance: map,
+        // ...state,
+        // mapInstance: map,
       };
 
     default:

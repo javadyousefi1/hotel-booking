@@ -18,7 +18,7 @@ import Image from "next/image"
 
 export default function NavigationMenuDemo() {
     return (
-        <header className="py-4  fixed top-0 left-0 right-0  ">
+        <header className="py-4  fixed top-0 left-0 right-0  border border-b">
             <div className="flex justify-between items-center  container mx-auto">
 
                 {/* logo */}
