@@ -8,7 +8,7 @@ export default function RootLayout({
     return (
         <>
             <Header />
-            <section className="">
+            <section className="dwedwed pt-[74px]">
                 {children}
             </section>
         </>

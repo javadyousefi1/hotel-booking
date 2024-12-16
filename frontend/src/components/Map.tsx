@@ -1,29 +1,31 @@
-"use client";
-import { useEffect, useRef } from "react";
-import L from 'leaflet';
+// components/Map.tsx
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { LatLngExpression } from 'leaflet';
+import { useEffect } from 'react';
 
-const Map = () => {
-  const mapRef = useRef(null);
+type MapProps = {
+  center: LatLngExpression;
+  zoom: number;
+};
 
-  useEffect(() => {
-    if (mapRef.current) {
-      const map = L.map(mapRef.current).setView([35.714548, 51.360095], 12);
-
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
-      }).addTo(map);
-
-      L.marker([35.714548, 51.360095]).addTo(map).bindPopup("A pretty CSS3 popup. <br /> Easily customizable.");
-
-      return () => {
-        map.remove(); // Clean up when the component unmounts
-      };
-    }
-  }, []);
+const Map = ({ center, zoom }: MapProps) => {
 
   return (
-    <div className="mt-32" style={{ height: '300px', width: '100%' }} ref={mapRef}></div>
+    <MapContainer
+      key={JSON.stringify(center)} // Force reinitialization if center changes
+      center={center}
+      zoom={zoom}
+      style={{ height: '100%', width: '100%' }}
+    >
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
+      />
+      <Marker position={center}>
+        <Popup>Default Location</Popup>
+      </Marker>
+    </MapContainer>
   );
 };
 
