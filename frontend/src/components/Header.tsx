@@ -69,7 +69,7 @@ export default function NavigationMenuDemo() {
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     :
-                    <Button><LogIn size={44} /></Button>)}
+                    <Link href="/login"> <Button><LogIn size={44} /></Button></Link>)}
 
 
                 <Sheet >
