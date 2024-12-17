@@ -9,12 +9,13 @@ import {
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image";
+import { LogIn, Search } from "lucide-react";
 
 const Page = () => {
     return (<div className="">
         <div className="container mx-auto pt-10">
 
-            <Card className="rounded-[34px] py-4 px-2 flex justify-evenly items-center ">
+            {/* <Card className="rounded-[34px] py-4 px-2 flex justify-evenly items-center ">
                 <CardContent className="pb-0 flex justify-center items-start flex-col">
                     <CardTitle>
                         <p className="font-semibold ">Location</p>
@@ -55,13 +56,21 @@ const Page = () => {
                 </CardContent>
                 <Separator orientation="vertical" />
                 <CardContent className="pb-0 flex justify-center items-start flex-col">
-                    <Button className="!bg-primary w-14 h-14 rounded-full">Button</Button>
+                    <Button className="!bg-primary w-14 h-14 rounded-full">
+                        <Search size={48} />
+                    </Button>
                 </CardContent>
             </Card>
+            <div className="relative w-full h-[70vh] mt-4 rounded-[30px] overflow-hidden">
+                <Image
+                    src="/assets/images/landing.png"
+                    alt="sweet home"
+                    fill
+                    className="object-cover object-center w-full h-full"
+                />
+            </div> */}
 
-            <div className="h-[70dvh]">
-                <Image src="/assets/images/landing.png" width={800} height={800} className="object-cover object-center !w-full mt-4 h-full !rounded-lg" alt="sweet home" />
-            </div>
+
         </div>
 
     </div>);
