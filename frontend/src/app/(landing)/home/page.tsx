@@ -11,8 +11,8 @@ import { Separator } from "@/components/ui/separator"
 import Image from "next/image";
 
 const Page = () => {
-    return (<div className=" h-[calc(100dvh-0px)]  ">
-        <div className="container mx-auto pt-32">
+    return (<div className="">
+        <div className="container mx-auto pt-10">
 
             <Card className="rounded-[34px] py-4 px-2 flex justify-evenly items-center ">
                 <CardContent className="pb-0 flex justify-center items-start flex-col">
@@ -59,8 +59,8 @@ const Page = () => {
                 </CardContent>
             </Card>
 
-            <div className="h-[80dvh]">
-                <Image src="/assets/images/landing.png" width={800} height={1900} className="object-cover object-center !w-full mt-4 h-full !rounded-lg" alt="sweet home" />
+            <div className="h-[70dvh]">
+                <Image src="/assets/images/landing.png" width={800} height={800} className="object-cover object-center !w-full mt-4 h-full !rounded-lg" alt="sweet home" />
             </div>
         </div>
 
