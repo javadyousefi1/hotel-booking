@@ -1,8 +1,7 @@
 "use client";
 
-import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
-import { Menu, Undo2 } from "lucide-react";
+import {  Undo2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function AuthLayout({
