@@ -10,11 +10,17 @@ const prisma = new PrismaClient();
 export const register = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password, name } = req.body;
     try {
+        // check if email already be in db
+        const alreadExist = await prisma.user.findUnique({ where: { email } });
+
+        if (alreadExist) {
+            throw new AppError("an user already exsited with this email", 400)
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await prisma.user.create({
             data: { email, password: hashedPassword, name },
         });
-        console.log(user)
         // Generate JWT token
         const token = generateToken(user.id);
 
