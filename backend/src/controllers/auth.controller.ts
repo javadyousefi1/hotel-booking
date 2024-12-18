@@ -25,13 +25,13 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
         const token = generateToken(user.id);
 
         // Send the token as a cookie
-        res.cookie('token', token, {
+        res.cookie(config.authToken, token, {
             httpOnly: true,
             maxAge: config.maxAge, // 1 hour
         });
 
         res.status(201).json({
-            success:true,
+            success: true,
             message: 'User registered successfully.',
             data: { name: user.name, email: user.email }
         });
@@ -59,7 +59,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
         const token = generateToken(user.id);
 
         // Send the token as a cookie
-        res.cookie('token', token, {
+        res.cookie(config.authToken, token, {
             httpOnly: true,
             maxAge: config.maxAge, // 1 hour
         });
@@ -71,5 +71,23 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
         });
     } catch (error) {
         next(error); // Pass errors to the error handler middleware
+    }
+};
+
+export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
+    try {
+        // The authenticated user is attached to req.body.user by the middleware
+        const user = req.body.user;
+        res.status(200).json({
+            success: true,
+            data: {
+                // id: user.id,
+                name: user.name,
+                email: user.email,
+                // createdAt: user.createdAt,
+            },
+        });
+    } catch (error) {
+        next(error);
     }
 };

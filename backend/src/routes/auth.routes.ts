@@ -1,7 +1,8 @@
 import { Router } from 'express';
-import { register, login } from '../controllers/auth.controller';
+import { register, login, checkAuth } from '../controllers/auth.controller';
 import { validate } from '../middlewares/validation.middleware';
 import { loginSchema, registerSchema } from '../validators/validator';
+import { authenticate } from '../middlewares/auth.middleware';
 
 const router = Router();
 
@@ -9,5 +10,7 @@ const router = Router();
 
 router.post('/register', validate(registerSchema), register);
 router.post('/login', validate(loginSchema), login);
+// Protected route
+router.get('/checkAuth', authenticate, checkAuth);
 
 export default router;
