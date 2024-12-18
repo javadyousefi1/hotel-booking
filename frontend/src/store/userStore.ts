@@ -17,8 +17,9 @@ type UserStore = {
 const useUserStore = create<UserStore>((set) => ({
   user: null,
   isAuthenticated: false,
-  setUser: (user) => set({ user, isAuthenticated: true }),
+  setUser: (user: User) => set({ user, isAuthenticated: true }),
   clearUser: () => set({ user: null, isAuthenticated: false }),
 }));
 
 export default useUserStore;
+
