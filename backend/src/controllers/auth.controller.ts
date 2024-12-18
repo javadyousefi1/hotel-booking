@@ -30,7 +30,11 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
             maxAge: config.maxAge, // 1 hour
         });
 
-        res.status(201).json({ message: 'User registered successfully.' });
+        res.status(201).json({
+            success:true,
+            message: 'User registered successfully.',
+            data: { name: user.name, email: user.email }
+        });
     } catch (error) {
         next(error);
     }
