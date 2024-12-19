@@ -14,8 +14,7 @@ import { LogIn, Search } from "lucide-react";
 const Page = () => {
     return (<div className="">
         <div className="container mx-auto pt-10">
-
-            {/* <Card className="rounded-[34px] py-4 px-2 flex justify-evenly items-center ">
+            <Card className="rounded-[34px] py-4 px-2 flex justify-evenly items-center ">
                 <CardContent className="pb-0 flex justify-center items-start flex-col">
                     <CardTitle>
                         <p className="font-semibold ">Location</p>
@@ -68,7 +67,7 @@ const Page = () => {
                     fill
                     className="object-cover object-center w-full h-full"
                 />
-            </div> */}
+            </div>
 
 
         </div>

@@ -29,6 +29,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
+import Profile from "./landing/Profile"
 
 export default function NavigationMenuDemo() {
 
@@ -63,28 +64,19 @@ export default function NavigationMenuDemo() {
 
 
                 {/* login | user profile */}
-                {isDesktop && (isAuthenticated ?
-                    <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    :
-                    <Link href="/login"> <Button><LogIn size={44} /></Button></Link>)}
+                <div className="hidden md:block">
+                    <Profile />
+                </div>
 
 
                 <Sheet >
-                    {!isDesktop &&
-                        <SheetTrigger asChild>
-                            <Button><Menu size={48} /></Button>
+                    <SheetTrigger asChild className="md:hidden">
+                        <Button ><Menu size={48} /></Button>
 
-                        </SheetTrigger>
-                    }
+                    </SheetTrigger>
                     <SheetContent side="left">
                         <SheetHeader>
                             <SheetTitle></SheetTitle>
-                            {/* <SheetDescription>
-                            Make changes to your profile here. Click save when you're done.
-                        </SheetDescription> */}
                         </SheetHeader>
 
                         {/* nav menu */}
@@ -110,15 +102,7 @@ export default function NavigationMenuDemo() {
 
                         <SheetFooter>
                             <SheetClose asChild>
-                                {(isAuthenticated ?
-                                    <Avatar>
-                                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-                                        <AvatarFallback>CN</AvatarFallback>
-                                    </Avatar>
-                                    :
-                                    <Button className="mt-10"><LogIn size={44} />
-                                        <span>Login</span>
-                                    </Button>)}
+                                <Profile />
                             </SheetClose>
                         </SheetFooter>
                     </SheetContent>
