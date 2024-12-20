@@ -13,7 +13,7 @@ import { LogIn, Search } from "lucide-react";
 
 const Page = () => {
     return (<div className="">
-        <div className="container mx-auto pt-10">
+        <div className="container mx-auto pt-3">
             <Card className="rounded-[34px] py-4 px-2 flex justify-evenly items-center ">
                 <CardContent className="pb-0 flex justify-center items-start flex-col">
                     <CardTitle>
