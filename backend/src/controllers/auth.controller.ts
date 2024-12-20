@@ -91,3 +91,17 @@ export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
         next(error);
     }
 };
+
+export const logOut = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        res.clearCookie(config.authToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+        });
+
+        res.status(200).json({ message: "user log out successfully" })
+    } catch (error) {
+        next(error)
+    }
+}
