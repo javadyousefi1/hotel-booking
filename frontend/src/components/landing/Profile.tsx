@@ -37,14 +37,17 @@ import {
     DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import useLogout from "@/hooks/useLogout";
+import Link from "next/link";
 
 
 const Profile = () => {
+    const { handleLogout } = useLogout()
     const { isAuthenticated, user } = useUserStore()
 
     return (<>
         {(isAuthenticated ?
-            <DropdownMenu>
+            <DropdownMenu modal={false}>
                 <DropdownMenuTrigger asChild>
                     <button>
                         <Avatar>
@@ -59,7 +62,7 @@ const Profile = () => {
                     <DropdownMenuGroup>
                         <DropdownMenuItem>
                             <User />
-                            <span>Profile</span>
+                            <span >Profile</span>
                             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                         </DropdownMenuItem>
 
@@ -73,15 +76,17 @@ const Profile = () => {
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
                         <LogOut />
-                        <span>Log out</span>
+                        <button onClick={handleLogout}>Log out</button>
                         <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
             :
-            <Button className="mt-10"><LogIn size={44} />
-                <span>Login</span>
-            </Button>
+            <Link href="/login">
+                <Button className="mt-10 md:mt-0"><LogIn size={44} />
+                    <span>Login</span>
+                </Button>
+            </Link>
 
         )}
 

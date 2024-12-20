@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import { useMutation } from "@tanstack/react-query"
 import { apiLoginUser } from "@/services/auth"
 import useUserStore from "@/store/userStore"
+import { useRouter } from "next/navigation"
 import { type LoginUserPayload } from "@/types/auth"
 
 const formSchema = z.object({
@@ -28,6 +29,7 @@ const formSchema = z.object({
 })
 
 const LoginForm = () => {
+    const router = useRouter()
 
     const { setUser } = useUserStore()
 
@@ -36,6 +38,7 @@ const LoginForm = () => {
         onSuccess: (res) => {
             const userData = res.data;
             setUser(userData)
+            router.push("/home")
         }
     })
 

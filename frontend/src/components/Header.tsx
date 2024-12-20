@@ -37,7 +37,7 @@ export default function NavigationMenuDemo() {
     const isDesktop = useMediaQuery('(min-width: 768px)')
 
     return (
-        <header className="py-4  fixed top-0 left-0 right-0  border border-b bg-white px-4">
+        <header className="py-4  fixed top-0 left-0 right-0  border border-b bg-white px-14">
             <div className="flex justify-between items-center  container mx-auto">
 
                 {/* logo */}
