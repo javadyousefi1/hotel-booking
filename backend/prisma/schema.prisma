@@ -20,3 +20,11 @@ model User {
   password     String
   createdAt DateTime @default(now())
 }
+
+model Hotel {
+  id        Int      @id @default(autoincrement())
+  title     String
+  desc      String
+  images    String[] // Array of image paths
+  createdAt DateTime @default(now())
+}

@@ -11,5 +11,9 @@ const loginSchema = Joi.object({
     password: Joi.string().min(6).required(),
 });
 
+export const hotelSchema = Joi.object({
+    title: Joi.string().min(3).max(100).required(),
+    desc: Joi.string().min(10).max(500).required(),
+});
 
 export { loginSchema, registerSchema }
