@@ -13,11 +13,6 @@ const Page = () => {
     <div className='container mx-auto'>
       <div className='mb-20'></div>
       <HotelCarts title='Entire home in Bordeaux' subTitle='Bordeaux Getaway' guest={4} beds={2} perNight={320} star={5} baths={3} reviews={12} hasKitchen hasParking hasWifi/>
-      <HotelCarts title='Entire home in Bordeaux' subTitle='Bordeaux Getaway' guest={4} beds={2} perNight={320} star={5} baths={3} reviews={12} hasKitchen hasParking hasWifi/>
-      <HotelCarts title='Entire home in Bordeaux' subTitle='Bordeaux Getaway' guest={4} beds={2} perNight={320} star={5} baths={3} reviews={12} hasKitchen hasParking hasWifi/>
-      <HotelCarts title='Entire home in Bordeaux' subTitle='Bordeaux Getaway' guest={4} beds={2} perNight={320} star={5} baths={3} reviews={12} hasKitchen hasParking hasWifi/>
-      <HotelCarts title='Entire home in Bordeaux' subTitle='Bordeaux Getaway' guest={4} beds={2} perNight={320} star={5} baths={3} reviews={12} hasKitchen hasParking hasWifi/>
-      <HotelCarts title='Entire home in Bordeaux' subTitle='Bordeaux Getaway' guest={4} beds={2} perNight={320} star={5} baths={3} reviews={12} hasKitchen hasParking hasWifi/>
     </div>
   </>
 }

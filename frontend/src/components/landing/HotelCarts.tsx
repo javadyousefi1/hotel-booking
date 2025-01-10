@@ -8,7 +8,7 @@ const starIcon = (<svg width="14" height="14" viewBox="0 0 14 14" fill="none">
 const HotelCarts: React.FC<{ title: string, subTitle: string, guest: number, beds: number, baths: number, perNight: number, star: number, reviews: number, hasWifi: boolean, hasParking: boolean, hasKitchen: boolean }> = ({ title, subTitle, guest, baths, beds, perNight, reviews, star, hasKitchen, hasParking, hasWifi }) => {
     return (<div className="w-full">
         <Separator />
-        <div className="flex justify-start gap-x-10 my-6 w-full">
+        <div className="flex justify-start gap-x-10 my-6 w-full md:flex-row flex-col gap-y-4">
             <Image src="/assets/images/landing.png" className="md:!w-[320px] aspect-video object-cover object-center rounded-xl !h-[200px]" width={320} height={300} quality={100} alt="sweet home" />
             <div className="flex-1">
                 <p className="text-sm text-gray-500">{title}</p>
@@ -28,7 +28,7 @@ const HotelCarts: React.FC<{ title: string, subTitle: string, guest: number, bed
                     </div>
 
                     <div>
-                        <p className="font-bold">${perNight} <span className="text-sm font-medium">/night</span></p>
+                        <p className="font-bold text-lg">${perNight} <span className="text-sm font-medium">/night</span></p>
                     </div>
                 </div>
             </div>
