@@ -4,4 +4,4 @@ export interface ServerResult<T> {
     statusCode: number
 }
 
-export type locType = [number, number]
+export type LocType = [number, number]
