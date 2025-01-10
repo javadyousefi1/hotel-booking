@@ -1,18 +1,40 @@
 import Image from "next/image";
 import { Separator } from "../ui/separator";
+import useMapAction from "@/store/useMapAction";
+import { Map } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { LocType } from "@/types/common";
 
 const starIcon = (<svg width="14" height="14" viewBox="0 0 14 14" fill="none">
     <path d="M7.00001 0.958252L8.45834 5.54158H13.0417L9.29168 8.45825L10.5417 13.0416L7.00001 10.1249L3.45834 13.0416L4.70834 8.45825L0.958344 5.54158H5.54168L7.00001 0.958252Z" fill="#FCD34D" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
 </svg>)
 
-const HotelCarts: React.FC<{ title: string, subTitle: string, guest: number, beds: number, baths: number, perNight: number, star: number, reviews: number, hasWifi: boolean, hasParking: boolean, hasKitchen: boolean }> = ({ title, subTitle, guest, baths, beds, perNight, reviews, star, hasKitchen, hasParking, hasWifi }) => {
+const HotelCarts: React.FC<{ title: string, subTitle: string, guest: number, beds: number, baths: number, perNight: number, star: number, reviews: number, hasWifi: boolean, hasParking: boolean, hasKitchen: boolean, location: LocType, coverImage: string }> = ({ title, subTitle, guest, baths, beds, perNight, reviews, star, hasKitchen, hasParking, hasWifi, location }) => {
+    const { flyTo } = useMapAction();
+
+    const handleFlyOnMap = () => {
+        flyTo(location)
+    }
+
     return (<div className="w-full">
         <div className="flex justify-start gap-x-10 my-6 w-full md:flex-row flex-col gap-y-4">
             <Image src="/assets/images/landing.png" className="md:!w-[320px] aspect-video object-cover object-center rounded-xl !h-[200px]" width={320} height={300} quality={100} alt="sweet home" />
             <div className="flex-1">
                 <p className="text-sm text-gray-500">{title}</p>
-                <h6 className="text-gray-700 text-2xl font-bold mt-1">{subTitle}</h6>
+                <div className="flex items-center gap-x-4">
+                    <h6 className="text-gray-700 text-2xl font-bold mt-1">{subTitle}</h6>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <div onClick={handleFlyOnMap}><Map color="var(--primary)" /></div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Show on map</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
 
+                </div>
                 <Separator className="w-[40px] my-4" />
 
                 <p className="text-gray-500 text-sm">{guest} guest · {beds} beds · {baths} baths </p>

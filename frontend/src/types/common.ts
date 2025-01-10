@@ -3,3 +3,5 @@ export interface ServerResult<T> {
     message: string | null,
     statusCode: number
 }
+
+export type locType = [number, number]
