@@ -4,6 +4,17 @@
  *   get:
  *     summary: get all users in system
  *     tags: [User]
+ *     parameters:
+ *       - name: page
+ *         in: query
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - name: perPage
+ *         in: query
+ *         required: true
+ *         schema:
+ *           type: string
  *     responses:
  *       201:
  *         description: User list gets successfully
