@@ -1,9 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
+// bcrypt
 import bcrypt from 'bcrypt';
+// helper
 import { generateToken } from '../utils/jwt';
+// prisma
 import { PrismaClient } from '@prisma/client';
-import { AppError } from '../utils/customError';
+// constant
 import config from '../constants/config';
+// helper
+import { AppError } from '../utils/customError';
 
 const prisma = new PrismaClient();
 
@@ -81,10 +86,8 @@ export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
         res.status(200).json({
             success: true,
             data: {
-                // id: user.id,
                 name: user.name,
                 email: user.email,
-                // createdAt: user.createdAt,
             },
         });
     } catch (error) {

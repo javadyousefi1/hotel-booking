@@ -6,6 +6,6 @@ const router = Router();
 
 
 router.get('/getAllUsers', getAllUsers);
-router.get('/deleteUser/:id', deleteUser);
+router.delete('/deleteUser/:id', deleteUser);
 
 export default router;
