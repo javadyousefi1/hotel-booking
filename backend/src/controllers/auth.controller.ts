@@ -94,6 +94,10 @@ export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
 
 export const logOut = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        if (!(config.authToken in req.cookies)) {
+            res.status(400).json({ message: "user already logged out!" })
+        }
+
         res.clearCookie(config.authToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',

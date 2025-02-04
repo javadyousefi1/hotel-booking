@@ -60,3 +60,13 @@ sudo npm install -g pm2
 
 
 
+install redis :
+
+sudo apt update && sudo apt upgrade -y
+sudo apt install redis-server -y
+sudo systemctl enable redis
+sudo systemctl start redis
+redis-cli ping
+
+get status redis :
+sudo systemctl status redis
