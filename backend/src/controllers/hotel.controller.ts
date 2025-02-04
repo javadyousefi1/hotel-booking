@@ -47,6 +47,7 @@ export const getAllHotels = async (req: Request, res: Response, next: NextFuncti
 
         res.json(result);
     } catch (error) {
+        console.log(error)
         next(error);
     }
 };
