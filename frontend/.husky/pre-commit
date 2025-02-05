@@ -1,13 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Run linting
-cd /frontend && npx eslint . 
+echo "Running ESLint..."
+cd frontend && npx eslint . --max-warnings=0 || exit 1  # Ensures failure on errors
 
-# Run tests
-# npm test
-
-# Run formatting
-npx prettier --write frontend
-
-
+echo "Running Prettier..."
+npx prettier --write frontend --ignore-path .prettierignore
