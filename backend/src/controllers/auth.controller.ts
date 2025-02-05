@@ -24,7 +24,7 @@ export const register = async (req: Request, res: Response, next: NextFunction) 
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await prisma.user.create({
-            data: { email, password: hashedPassword, name, role : ["user"] },
+            data: { email, password: hashedPassword, name, role: ["user"] },
         });
         // Generate JWT token
         const token = generateToken(user.id);
@@ -88,13 +88,23 @@ export const checkAuth = (req: Request, res: Response, next: NextFunction) => {
             data: {
                 name: user.name,
                 email: user.email,
+                role: user.role
             },
         });
     } catch (error) {
         next(error);
     }
 };
-
+export const changeUserRole = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const userData = req.body.user
+        const newRole = req.body.role;
+        await prisma.user.update({ where: { id: userData.id }, data: { ...userData, role: newRole } })
+        res.status(200).json({ message: "user role changes succesfully" })
+    } catch (error) {
+        next(error)
+    }
+}
 export const logOut = async (req: Request, res: Response, next: NextFunction) => {
     try {
         if (!(config.authToken in req.cookies)) {

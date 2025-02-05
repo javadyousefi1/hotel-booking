@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { deleteUser, getAllUsers } from '../controllers/users.controller';
+import { checkIsAdminMiddleware } from '../middlewares/auth.middleware';
 
 const router = Router();
 
