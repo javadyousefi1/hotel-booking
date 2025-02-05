@@ -1,6 +1,11 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+if [[ "$(pwd)" != *"/frontend"* ]]; then
+  echo "Skipping Husky hooks because commit is not in frontend"
+  exit 0
+fi
+
 echo "Running ESLint..."
 cd frontend && npx eslint . --max-warnings=0 || exit 1  # Ensures failure on errors
 
