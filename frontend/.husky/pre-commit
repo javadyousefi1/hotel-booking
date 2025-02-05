@@ -2,7 +2,7 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # Run linting
-# cd frontend && npx eslint . --fix
+cd frontend && npx eslint . --fix
 
 # Run tests
 # npm test

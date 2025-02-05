@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/navigation-menu';
 import Image from 'next/image';
 import { Button } from './ui/button';
-import {  Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 
 import {
   Sheet,

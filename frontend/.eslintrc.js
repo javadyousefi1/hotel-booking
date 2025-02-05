@@ -1,4 +1,6 @@
-module.exports = {
+export default {
+  ignorePatterns: [".next/*"],
+  ignores: [".next/*"],
   root: true,
   extends: [
     'next/core-web-vitals',
