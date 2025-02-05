@@ -6,7 +6,7 @@ const router = Router();
 
 
 
-router.get('/getAllUsers', getAllUsers);
+router.get('/getAllUsers', checkIsAdminMiddleware, getAllUsers);
 router.delete('/deleteUser/:id', deleteUser);
 
 export default router;
