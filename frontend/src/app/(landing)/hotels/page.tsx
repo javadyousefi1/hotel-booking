@@ -1,7 +1,9 @@
-"use client"
+'use client';
 import HotelCarts from '@/components/landing/HotelCarts';
 import dynamic from 'next/dynamic';
-const DynamicMap = dynamic(() => import('@/components/landing/map/Map'), { ssr: false });
+const DynamicMap = dynamic(() => import('@/components/landing/map/Map'), {
+  ssr: false,
+});
 
 // Updated LocType definition
 export type LocType = [number, number];
@@ -9,8 +11,8 @@ export type LocType = [number, number];
 // Fake data for HotelCarts with location as [lat, lng]
 const hotelData = [
   {
-    title: "Cozy Apartment",
-    subTitle: "Luxury Suite in Downtown",
+    title: 'Cozy Apartment',
+    subTitle: 'Luxury Suite in Downtown',
     guest: 2,
     beds: 1,
     baths: 1,
@@ -21,11 +23,11 @@ const hotelData = [
     hasParking: true,
     hasKitchen: true,
     location: [40.7128, -74.006], // New York
-    coverImage: "https://source.unsplash.com/random/320x200/?apartment",
+    coverImage: 'https://source.unsplash.com/random/320x200/?apartment',
   },
   {
-    title: "Beach House",
-    subTitle: "Ocean View Retreat",
+    title: 'Beach House',
+    subTitle: 'Ocean View Retreat',
     guest: 6,
     beds: 3,
     baths: 2,
@@ -36,11 +38,11 @@ const hotelData = [
     hasParking: true,
     hasKitchen: true,
     location: [34.0522, -118.2437], // Los Angeles
-    coverImage: "https://source.unsplash.com/random/320x200/?beach-house",
+    coverImage: 'https://source.unsplash.com/random/320x200/?beach-house',
   },
   {
-    title: "Mountain Cabin",
-    subTitle: "Charming Cabin in the Woods",
+    title: 'Mountain Cabin',
+    subTitle: 'Charming Cabin in the Woods',
     guest: 4,
     beds: 2,
     baths: 1,
@@ -51,11 +53,11 @@ const hotelData = [
     hasParking: false,
     hasKitchen: true,
     location: [39.7392, -104.9903], // Denver
-    coverImage: "https://source.unsplash.com/random/320x200/?cabin",
+    coverImage: 'https://source.unsplash.com/random/320x200/?cabin',
   },
   {
-    title: "City Loft",
-    subTitle: "Modern Loft with Skyline Views",
+    title: 'City Loft',
+    subTitle: 'Modern Loft with Skyline Views',
     guest: 2,
     beds: 1,
     baths: 1,
@@ -66,11 +68,11 @@ const hotelData = [
     hasParking: false,
     hasKitchen: false,
     location: [51.5074, -0.1278], // London
-    coverImage: "https://source.unsplash.com/random/320x200/?loft",
+    coverImage: 'https://source.unsplash.com/random/320x200/?loft',
   },
   {
-    title: "Countryside Villa",
-    subTitle: "Relaxing Getaway in the Countryside",
+    title: 'Countryside Villa',
+    subTitle: 'Relaxing Getaway in the Countryside',
     guest: 8,
     beds: 4,
     baths: 3,
@@ -81,26 +83,28 @@ const hotelData = [
     hasParking: true,
     hasKitchen: true,
     location: [48.8566, 2.3522], // Paris
-    coverImage: "https://source.unsplash.com/random/320x200/?villa",
+    coverImage: 'https://source.unsplash.com/random/320x200/?villa',
   },
 ];
 
-
 const Page = () => {
-  return <>
-    <div className='container mx-auto'>
-      <div className='h-[calc(100dvh-90px)] flex  scrollbar'>
-        <div className='overflow-y-auto pr-8 min-w-[700px]'>
+  return (
+    <>
+      <div className="container mx-auto">
+        <div className="h-[calc(100dvh-90px)] flex  scrollbar">
+          <div className="overflow-y-auto pr-8 min-w-[700px]">
+            {hotelData?.map((item, index) => (
+              <HotelCarts {...item} key={index} />
+            ))}
+          </div>
 
-          {hotelData?.map((item, index) => <HotelCarts {...item} key={index} />)}
-        </div>
-
-        <div className="h-full w-full p-3">
-          <DynamicMap center={[51.404343, 35.715298,].reverse()} zoom={13} />
+          <div className="h-full w-full p-3">
+            <DynamicMap center={[51.404343, 35.715298].reverse()} zoom={13} />
+          </div>
         </div>
       </div>
-    </div>
-  </>
-}
+    </>
+  );
+};
 
-export default Page
+export default Page;

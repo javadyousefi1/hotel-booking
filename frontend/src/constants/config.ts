@@ -1,7 +1,7 @@
 const appInfo = {
-    baseInfo: {
-        name: "Airbnb"
-    }
-}
+  baseInfo: {
+    name: 'Airbnb',
+  },
+};
 
-export default Object.freeze(appInfo)
+export default Object.freeze(appInfo);

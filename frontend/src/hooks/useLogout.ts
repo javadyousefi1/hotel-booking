@@ -1,21 +1,20 @@
-import { apiLogOutUser } from "@/services/auth"
-import useUserStore from "@/store/userStore"
-import { useMutation } from "@tanstack/react-query"
+import { apiLogOutUser } from '@/services/auth';
+import useUserStore from '@/store/userStore';
+import { useMutation } from '@tanstack/react-query';
 
 const useLogout = () => {
+  const { clearUser } = useUserStore();
 
-    const { clearUser } = useUserStore()
+  const { mutate } = useMutation({
+    mutationFn: apiLogOutUser,
+  });
 
-    const { mutate } = useMutation({
-        mutationFn: apiLogOutUser
-    })
+  const handleLogout = async () => {
+    await mutate();
+    clearUser();
+  };
 
-    const handleLogout = async () => {
-        await mutate()
-        clearUser()
-    }
+  return { handleLogout };
+};
 
-    return { handleLogout };
-}
-
-export default useLogout
+export default useLogout;

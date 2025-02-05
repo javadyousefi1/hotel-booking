@@ -1,1 +1,5 @@
 npm test
+echo '#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx lint-staged' > .husky/pre-commit

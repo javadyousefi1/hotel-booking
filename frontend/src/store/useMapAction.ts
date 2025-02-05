@@ -12,4 +12,3 @@ const useMapAction = create<UserStore>((set) => ({
 }));
 
 export default useMapAction;
-
