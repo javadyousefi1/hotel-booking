@@ -3,6 +3,7 @@
 
 if [[ "$(pwd)" != *"/frontend"* ]]; then
   echo "Skipping Husky hooks because commit is not in frontend"
+  echo pwd
   exit 0
 fi
 
