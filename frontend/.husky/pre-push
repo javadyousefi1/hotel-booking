@@ -1,0 +1,13 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running ESLint..."
+npx eslint . --max-warnings=0 || exit 1  # Stop push if ESLint errors exist
+
+echo "Running Prettier..."
+npx prettier --write frontend --ignore-path .prettierignore || exit 1  # Stop push if Prettier fails
+
+echo "Building Project with pnpm..."
+pnpm run build || exit 1  # Stop push if build fails
+
+echo "✅ All checks passed. Pushing..."
