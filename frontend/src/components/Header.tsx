@@ -26,7 +26,6 @@ import {
 import Profile from './landing/Profile';
 
 export default function NavigationMenuDemo() {
-
   return (
     <header className="py-4  fixed top-0 left-0 right-0  border border-b bg-white px-14 z-10">
       <div className="flex justify-between items-center  container mx-auto">

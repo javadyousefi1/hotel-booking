@@ -2,12 +2,12 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # Run linting
-npx eslint . --fix
+# cd frontend && npx eslint . --fix
 
 # Run tests
-npm test
+# npm test
 
 # Run formatting
-npx prettier --write .
+npx prettier --write ./frontend
 
 

@@ -33,7 +33,7 @@ const SignupForm = () => {
   const router = useRouter();
   const { setUser } = useUserStore();
 
-  const { mutate: handleSignupUser, } = useMutation({
+  const { mutate: handleSignupUser } = useMutation({
     mutationFn: (payload: SignupUserPayload) =>
       apiSignupUser(payload as SignupUserPayload),
     onSuccess: (res) => {
