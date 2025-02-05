@@ -1,6 +1,6 @@
 export default {
-  ignorePatterns: [".next/*"],
-  ignores: [".next/*"],
+  ignorePatterns: ['.next/*'],
+  ignores: ['.next/*'],
   root: true,
   extends: [
     'next/core-web-vitals',
