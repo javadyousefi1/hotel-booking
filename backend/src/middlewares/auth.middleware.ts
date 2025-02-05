@@ -59,7 +59,7 @@ export const checkIsAdminMiddleware = async (req: Request, res: Response, next: 
         // Attach the user to the request object
         
         if (!user.role.includes("admin")) {
-            // throw new AppError('Just admin can access to this endpoint.', 401);
+            throw new AppError('Just admin can access to this endpoint.', 401);
         }
         
         req.body.user = user;
