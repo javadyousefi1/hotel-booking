@@ -1,8 +1,11 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Lint only staged files and fix issues
-npx lint-staged
+# Run linting
+npx eslint . --fix
 
-# Run ESLint on the whole project to ensure no errors
-npx eslint . --max-warnings=0
+# Run tests
+npm test
+
+# Run formatting
+npx prettier --write .
