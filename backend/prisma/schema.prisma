@@ -19,7 +19,8 @@ model User {
   email     String   @unique
   password     String
   createdAt DateTime @default(now())
-  role  String[] @default(["user"])
+  role  String[] @default(["user"]) // ✅ Default role is "user"
+
 }
 
 model Hotel {

@@ -14,7 +14,6 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
             page: Number(page),
             perPage: Number(perPage)
         });
-        console.log(result, "result")
         res.json(result);
     } catch (error) {
         next(error);
