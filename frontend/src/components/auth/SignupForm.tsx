@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -34,7 +33,7 @@ const SignupForm = () => {
   const router = useRouter();
   const { setUser } = useUserStore();
 
-  const { mutate: handleSignupUser, isPending } = useMutation({
+  const { mutate: handleSignupUser, } = useMutation({
     mutationFn: (payload: SignupUserPayload) =>
       apiSignupUser(payload as SignupUserPayload),
     onSuccess: (res) => {

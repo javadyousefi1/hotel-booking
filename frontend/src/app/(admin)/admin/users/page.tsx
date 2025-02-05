@@ -17,9 +17,7 @@ import appInfo from '@/constants/config';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,

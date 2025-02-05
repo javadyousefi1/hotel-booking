@@ -1,7 +1,6 @@
 'use client';
 import * as React from 'react';
 import Link from 'next/link';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -19,7 +18,6 @@ import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -28,8 +26,6 @@ import {
 import Profile from './landing/Profile';
 
 export default function NavigationMenuDemo() {
-  const { isAuthenticated } = useUserStore();
-  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   return (
     <header className="py-4  fixed top-0 left-0 right-0  border border-b bg-white px-14 z-10">
