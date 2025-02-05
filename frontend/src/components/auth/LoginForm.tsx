@@ -52,7 +52,6 @@ const LoginForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     handleLoginUser(values);
   }
 

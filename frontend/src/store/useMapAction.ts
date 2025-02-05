@@ -3,7 +3,7 @@ import { create } from 'zustand';
 
 type UserStore = {
   currentLocation: LocType | null;
-  flyTo: (user: LocType) => void;
+  flyTo: (_user: LocType) => void;
 };
 
 const useMapAction = create<UserStore>((set) => ({

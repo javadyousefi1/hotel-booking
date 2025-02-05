@@ -53,7 +53,6 @@ const SignupForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     handleSignupUser(values);
   }
 

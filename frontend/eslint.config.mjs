@@ -6,7 +6,7 @@ import pluginReact from 'eslint-plugin-react';
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
-    ignores: ['.next/*'],
+    ignores: ['.next/*', "src/components/ui/*"],
   },
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   { languageOptions: { globals: globals.browser } },
@@ -15,8 +15,21 @@ export default [
   pluginReact.configs.flat.recommended,
   {
     rules: {
-      'react/react-in-jsx-scope': 'off', // ✅ Disable React import requirement
+      // React ✅
+      'react/jsx-key': 'error',
       'react/prop-types': 'off',
+      'react/no-unused-state': 'warn',
+      'react/react-in-jsx-scope': 'off',
+      'react/destructuring-assignment': ['warn', 'always'],
+
+      //  Best Practices ✅
+      'complexity': ['warn', { max: 10 }],
+      'no-console': ['warn', { allow: ['warn', 'error'] }],
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],    
+      'max-lines': ['error', { max: 500, skipBlankLines: true, skipComments: true }],
+
+      //  Typescript ✅
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
   },
 ];

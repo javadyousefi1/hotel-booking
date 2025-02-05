@@ -10,7 +10,7 @@ type User = {
 type UserStore = {
   user: User | null;
   isAuthenticated: boolean;
-  setUser: (user: User) => void;
+  setUser: (_user: User) => void;
   clearUser: () => void;
 };
 
