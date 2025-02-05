@@ -5,4 +5,4 @@ echo "Running ESLint..."
 cd frontend && npx eslint . --max-warnings=0 || exit 1  # Ensures failure on errors
 
 echo "Running Prettier..."
-npx prettier --write frontend --ignore-path .prettierignore
+npx prettier --write . --ignore-path .prettierignore
