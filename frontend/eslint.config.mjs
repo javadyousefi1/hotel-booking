@@ -25,7 +25,7 @@ export default [
 
       // Best Practices ✅
       complexity: ['warn', { max: 10 }],
-      'camelcase': ['error', { properties: 'never' }],
+      camelcase: ['error', { properties: 'never' }],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       'max-lines': [
@@ -35,8 +35,10 @@ export default [
 
       //  Typescript ✅
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
 
       // Performance ✅
       'no-duplicate-imports': 'error',
