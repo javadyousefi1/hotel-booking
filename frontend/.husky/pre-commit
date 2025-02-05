@@ -1,4 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# Lint only staged files and fix issues
 npx lint-staged
+
+# Run ESLint on the whole project to ensure no errors
+npx eslint . --max-warnings=0
