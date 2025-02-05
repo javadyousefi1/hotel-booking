@@ -9,10 +9,8 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import Image from 'next/image';
-import useUserStore from '@/store/userStore';
 import { Button } from './ui/button';
-import { LogIn, Menu } from 'lucide-react';
-import useMediaQuery from '@/hooks/use-media-query';
+import {  Menu } from 'lucide-react';
 
 import {
   Sheet,
