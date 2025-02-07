@@ -1,6 +1,6 @@
 /**
  * @swagger
- * /user/getAllUsers:
+ * /users:
  *   get:
  *     summary: get all users in system
  *     tags: [User]
@@ -23,7 +23,7 @@
  */
 /**
  * @swagger
- * /user/deleteUser/{id}:
+ * /users/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [User]
