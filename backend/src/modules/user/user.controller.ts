@@ -34,4 +34,23 @@ export const UserController = {
       next(error);
     }
   },
+
+  async updateUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id, name } = req.body;
+      const updateResult = await UserService.updateUser({ name, id });
+
+      if (!updateResult.success) {
+        res.status(404).json({ error: updateResult.message });
+      } else {
+        res.status(200).json({
+          message: "User deleted successfully",
+          deletedUser: { name: updateResult.updatedUser?.name, email: updateResult.updatedUser?.email, role: updateResult.updatedUser?.role, },
+        });
+      }
+
+    } catch (error) {
+      next(error);
+    }
+  },
 };

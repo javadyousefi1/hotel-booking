@@ -11,10 +11,14 @@ const loginSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().min(6).required(),
 });
+const updateUserSchema = Joi.object({
+    id: Joi.number().required(),
+    name: Joi.string().required(),
+});
 
 export const hotelSchema = Joi.object({
     title: Joi.string().min(3).max(100).required(),
     desc: Joi.string().min(10).max(500).required(),
 });
 
-export { loginSchema, registerSchema }
+export { loginSchema, registerSchema, updateUserSchema }
