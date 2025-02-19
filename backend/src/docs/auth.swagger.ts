@@ -17,6 +17,8 @@
  *                 type: string
  *               name:
  *                 type: string
+ *               isHost:
+ *                 type: boolean
  *     responses:
  *       201:
  *         description: User registered successfully

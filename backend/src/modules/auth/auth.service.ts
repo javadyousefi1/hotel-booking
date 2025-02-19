@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 export const AuthService = {
     async register(body: IRegisterUserBody) {
         try {
-            const { email, name, password } = body
+            const { email, name, password, isHost } = body
             // check if email already be in db
             const alreadExist = await prisma.user.findUnique({ where: { email } });
 
@@ -20,13 +20,16 @@ export const AuthService = {
             }
 
             const hashedPassword = await bcrypt.hash(password, 10);
+
+            const userRole = isHost ? [config.userRoles.HOST] : [config.userRoles.USER];
+
             const user = await prisma.user.create({
-                data: { email, password: hashedPassword, name, },
+                data: { email, password: hashedPassword, name, role: userRole },
             });
             // Generate JWT token
             const token = generateToken(user.id);
 
-            return { success: true, token };
+            return { success: true, token, userRole };
         } catch (error: any) {
             if (error.code === "P2025") {
                 return { success: false, error: "User not found" };
@@ -66,7 +69,7 @@ export const AuthService = {
             const result = verifyToken(token)
             if (typeof result === "object" && "userId" in result) {
                 const user = await prisma.user.findUnique({ where: { id: result.userId } });
-                return { success: true, data: { name: user?.name, email: user?.email } };
+                return { success: true, data: { name: user?.name, email: user?.email, role: user?.role } };
             } else {
                 return { success: false }
             }

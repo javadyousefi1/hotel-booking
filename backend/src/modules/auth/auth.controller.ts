@@ -7,7 +7,7 @@ export const AuthController = {
     async registerUser(req: Request, res: Response, next: NextFunction) {
         try {
             const { email, name, password } = req.body;
-            const { token } = await AuthService.register({ email, name, password });
+            const { token, userRole } = await AuthService.register({ email, name, password });
 
             // Send the token as a cookie
             res.cookie(config.authToken, token, {
@@ -18,7 +18,7 @@ export const AuthController = {
             res.status(201).json({
                 success: true,
                 message: 'User registered successfully.',
-                data: { name: name, email: email }
+                data: { name: name, email: email, role: userRole }
             });
 
         } catch (error) {
