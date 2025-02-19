@@ -23,13 +23,13 @@ export const UserController = {
       const deleteResult = await UserService.deleteUser(userId);
 
       if (!deleteResult.success) {
-        return res.status(404).json({ error: deleteResult.error });
+        res.status(404).json({ error: deleteResult.error });
+      } else {
+        res.status(200).json({
+          message: "User deleted successfully",
+          deletedUser: { email: deleteResult.deletedUser?.email, name: deleteResult.deletedUser?.name, role: deleteResult.deletedUser?.role },
+        });
       }
-
-      res.status(200).json({
-        message: "User deleted successfully",
-        deletedUser: deleteResult.deletedUser,
-      });
     } catch (error) {
       next(error);
     }

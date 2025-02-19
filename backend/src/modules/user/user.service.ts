@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { paginate } from "../utils/pagination.helper";
+import { paginate } from "../../utils/pagination.helper";
 
 const prisma = new PrismaClient();
 

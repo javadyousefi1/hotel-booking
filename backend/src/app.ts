@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import authRoutes from './modules/auth/auth.route';
+import userRoutes from './modules/user/user.route';
 import { errorHandler } from './middlewares/error.middleware';
 import { setupSwagger } from './swagger';
 
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/auth', authRoutes);
-// app.use('v1/user', userRoutes);
+app.use('/user', userRoutes);
 
 // Setup Swagger
 setupSwagger(app);
