@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 # Get the current branch name
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
@@ -11,6 +8,6 @@ if [ "$CURRENT_BRANCH" != "main" ]; then
 fi
 
 echo "Building Project with pnpm..."
-pnpm run build || exit 1  # Stop push if build fails
+cd frontend && pnpm run build || exit 1  # Stop push if build fails
 
 echo "✅ All checks passed. Pushing..."
