@@ -10,11 +10,13 @@
  *         required: true
  *         schema:
  *           type: string
+ *           default: "1" 
  *       - name: perPage
  *         in: query
  *         required: true
  *         schema:
  *           type: string
+ *           default: "10" 
  *     responses:
  *       201:
  *         description: User list gets successfully

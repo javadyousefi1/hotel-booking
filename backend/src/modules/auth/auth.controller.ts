@@ -70,7 +70,6 @@ export const AuthController = {
         try {
 
             const result = await AuthService.logOut(req.cookies)
-            console.log(result, "result")
             if (result?.success) {
                 res.clearCookie(config.authToken, {
                     httpOnly: true,
