@@ -12,24 +12,41 @@ export const AuthService = {
     async register(body: IRegisterUserBody) {
         try {
             const { email, name, password, isHost } = body
-            // check if email already be in db
-            const alreadExist = await prisma.user.findUnique({ where: { email } });
-
-            if (alreadExist) {
-                throw new AppError("an user already exsited with this email", 400)
-            }
-
-            const hashedPassword = await bcrypt.hash(password, 10);
-
             const userRole = isHost ? [config.userRoles.HOST] : [config.userRoles.USER];
 
-            const user = await prisma.user.create({
-                data: { email, password: hashedPassword, name, role: userRole },
-            });
-            // Generate JWT token
-            const token = generateToken(user.id);
+            // check if email already be in db
+            const alreadExist = await prisma.user.findUnique({ where: { email, } })
 
-            return { success: true, token, userRole };
+            if (alreadExist) {
+
+                if (alreadExist.role.includes(config.userRoles.HOST) && alreadExist.role.includes(config.userRoles.USER)) {
+                    throw new AppError("you have account with user and host role", 400)
+                } else if (alreadExist.role.includes(userRole[0])) {
+                    throw new AppError("you have account with this email", 400)
+                } else {
+                    const updatedResult = await prisma.user.update({
+                        where: { email }, data: {
+                            role: {
+                                push: userRole[0]
+                            }
+                        }
+                    })
+                    // Generate JWT token
+                    const token = generateToken(alreadExist.id);
+
+                    return { success: true, token, userRole: updatedResult.role };
+                }
+            } else {
+                const hashedPassword = await bcrypt.hash(password, 10);
+                const user = await prisma.user.create({
+                    data: { email, password: hashedPassword, name, role: userRole },
+                });
+                // Generate JWT token
+                const token = generateToken(user.id);
+
+                return { success: true, token, userRole };
+            }
+
         } catch (error: any) {
             if (error.code === "P2025") {
                 return { success: false, error: "User not found" };
@@ -69,6 +86,7 @@ export const AuthService = {
             const result = verifyToken(token)
             if (typeof result === "object" && "userId" in result) {
                 const user = await prisma.user.findUnique({ where: { id: result.userId } });
+                if (!user) throw { message: "user not found" }
                 return { success: true, data: { name: user?.name, email: user?.email, role: user?.role } };
             } else {
                 return { success: false }

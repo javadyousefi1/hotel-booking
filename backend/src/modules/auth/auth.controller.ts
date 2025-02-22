@@ -6,8 +6,8 @@ import { UserService } from '../user/user.service';
 export const AuthController = {
     async registerUser(req: Request, res: Response, next: NextFunction) {
         try {
-            const { email, name, password } = req.body;
-            const { token, userRole } = await AuthService.register({ email, name, password });
+            const { email, name, password, isHost } = req.body;
+            const { token, userRole } = await AuthService.register({ email, name, password, isHost });
 
             // Send the token as a cookie
             res.cookie(config.authToken, token, {
