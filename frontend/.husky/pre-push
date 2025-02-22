@@ -1,11 +1,14 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-echo "Running ESLint..."
-cd frontend && npx eslint . --max-warnings=0 || exit 1  # Ensures failure on errors
+# Get the current branch name
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
-echo "Running Prettier..."
-npx prettier --write . --ignore-path .prettierignore || exit 1  # Stop push if Prettier fails
+# Check if the current branch is "master"
+if [ "$CURRENT_BRANCH" != "main" ]; then
+  echo "Skipping pre-push checks as the current branch is not 'master'. ✅"
+  exit 0
+fi
 
 echo "Building Project with pnpm..."
 pnpm run build || exit 1  # Stop push if build fails

@@ -4,11 +4,16 @@ const registerSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().min(6).required(),
     name: Joi.string().required(),
+    isHost: Joi.boolean()
 });
 
 const loginSchema = Joi.object({
     email: Joi.string().email().required(),
     password: Joi.string().min(6).required(),
+});
+const updateUserSchema = Joi.object({
+    id: Joi.number().required(),
+    name: Joi.string().required(),
 });
 
 export const hotelSchema = Joi.object({
@@ -16,4 +21,4 @@ export const hotelSchema = Joi.object({
     desc: Joi.string().min(10).max(500).required(),
 });
 
-export { loginSchema, registerSchema }
+export { loginSchema, registerSchema, updateUserSchema }

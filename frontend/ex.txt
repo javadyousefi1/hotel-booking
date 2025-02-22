@@ -70,3 +70,7 @@ redis-cli ping
 
 get status redis :
 sudo systemctl status redis
+
+
+download file :
+scp ubuntu@194.5.207.248:/home/ubuntu/my-vpn.ovpn C:\Users\op-0038\

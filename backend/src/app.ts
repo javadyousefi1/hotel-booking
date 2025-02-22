@@ -2,9 +2,8 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import authRoutes from './routes/auth.routes';
-import hotelRoutes from './routes/hotel.routes';
-import userRoutes from './routes/users.routes';
+import authRoutes from './modules/auth/auth.route';
+import userRoutes from './modules/user/user.route';
 import { errorHandler } from './middlewares/error.middleware';
 import { setupSwagger } from './swagger';
 
@@ -18,7 +17,6 @@ app.use(cookieParser());
 
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
-app.use('/hotel', hotelRoutes);
 
 // Setup Swagger
 setupSwagger(app);

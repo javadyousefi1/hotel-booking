@@ -17,6 +17,8 @@
  *                 type: string
  *               name:
  *                 type: string
+ *               isHost:
+ *                 type: boolean
  *     responses:
  *       201:
  *         description: User registered successfully
@@ -72,32 +74,3 @@
  *         description: Invalid request
  */
 /**
-/**
- * @swagger
- * /auth/changeUserRole:
- *   post:
- *     summary: change the user current role
- *     tags: [Auth]
- *     requestBody:
- *       description: Object containing role updates
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - role
- *             properties:
- *               role:
- *                 type: array
- *                 items:
- *                   type: string
- *                   example: admin
- *             example:
- *               role: ["admin", "user"]
- *     responses:
- *       201:
- *         description: User role successfully updated
- *       400:
- *         description: Invalid request
- */

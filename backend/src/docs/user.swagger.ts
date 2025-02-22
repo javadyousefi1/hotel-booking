@@ -56,3 +56,26 @@
  *                   type: string
  *                   example: "User not found"
  */
+/**
+ * @swagger
+ * /user/updateUser:
+ *   put:
+ *     summary: update user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: number
+ *               name:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: Invalid request
+ */
