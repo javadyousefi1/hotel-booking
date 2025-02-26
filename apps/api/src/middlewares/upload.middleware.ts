@@ -1,27 +1,36 @@
+import { NextFunction, Request, Response } from 'express';
 import multer from 'multer';
 import path from 'path';
 
 // Configure Multer storage
+
+// Initialize multer storage and file filter
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    console.log(req.body ,"hererferfe")
-    cb(null, 'uploads/'); // Save files to 'uploads' directory
+    cb(null, 'uploads/images/'); // Define your upload directory
   },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Add a timestamp to the filename
-  },
+    const extension = file.originalname.split('.').pop();
+    const fileName = `${Date.now()}-${Math.floor(Math.random() * 99999) + 1}.${extension}`;
+    req.body.fileName = fileName;
+    cb(null, fileName);
+  }
 });
 
-// File filter for validation (e.g., allow only image files)
 const fileFilter = (req: any, file: any, cb: any) => {
-  if (file.mimetype.startsWith('image/')) {
-    cb(null, true);
-  } else {
-    cb(new Error('Invalid file type. Only images are allowed!'), false);
+  if (!file.mimetype.startsWith('image/')) {
+    return cb(new Error('Only image files are allowed'), false);
   }
+  cb(null, true);
 };
 
-// Multer instance
-const upload = multer({ storage, fileFilter });
+export const upload = multer({ storage, fileFilter });
 
-export default upload;
+// Middleware to check if a file is uploaded
+export const requireFile = (req: Request, res: Response, next: NextFunction): void => {
+  if (!req.file) {
+    res.status(400).json({ message: 'Image file is required' });
+    return; // Ensure we don't call next() after sending a response
+  }
+  next(); // Call next() to continue if file is present
+};
