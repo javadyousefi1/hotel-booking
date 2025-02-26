@@ -6,14 +6,25 @@ const prisma = new PrismaClient();
 
 
 export const ImageController = {
+  async getImage(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { page, perPage } = req.query;
+      const result = await ImageService.getAllimages(
+        Number(page),
+        Number(perPage),
+      );
+      res.json(result);
+    } catch (error) {
+      next(error);
+    }
+  },
   async saveImage(req: Request, res: Response, next: NextFunction) {
     try {
       const fileName = req.body.fileName
-      const path = "/uploads/images/" + fileName
-      const createdImage = await prisma.image.create({ data: { path: path } })
-      console.log(createdImage ,"createdImage")
-      
-      res.json({ message: "result" });
+
+      const imageResult = await ImageService.createImage(fileName)
+
+      res.json({ message: "image uploaded successfully", data: imageResult.data });
     } catch (error) {
       next(error);
     }
