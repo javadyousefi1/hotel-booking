@@ -3,14 +3,12 @@ import { verifyToken } from '../utils/jwt';
 import { PrismaClient } from '@prisma/client';
 import { AppError } from '../utils/customError';
 import config from '../constants/config';
+import { AuthenticatedRequest, IUserModal } from '../interfaces/auth';
 
 const prisma = new PrismaClient();
 
 // Define interfaces for authenticated requests
-export interface AuthenticatedRequest extends Request {
-    userData?: number;
-    user?: Record<string, any>;
-}
+
 
 export const authenticate = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
     try {
@@ -35,10 +33,11 @@ export const authenticate = async (req: AuthenticatedRequest, res: Response, nex
 
         if (!user) {
             throw new AppError('User not found.', 404);
+        } else {
+            req.userData = user
         }
 
-        // Attach the user to the request object
-        req.userData = user.id;  // Changed from req.body.userData
+
 
         next();
     } catch (error) {
@@ -47,41 +46,41 @@ export const authenticate = async (req: AuthenticatedRequest, res: Response, nex
     }
 };
 
-export const checkIsAdminMiddleware = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-    try {
-        // Retrieve the token from cookies or Authorization header
-        const token = req.cookies[config.authToken] || req.headers.authorization?.split(' ')[1];
+// export const checkIsAdminMiddleware = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+//     try {
+//         // Retrieve the token from cookies or Authorization header
+//         const token = req.cookies[config.authToken] || req.headers.authorization?.split(' ')[1];
 
-        if (!token) {
-            throw new AppError('No token provided.', 401);
-        }
+//         if (!token) {
+//             throw new AppError('No token provided.', 401);
+//         }
 
-        // Verify the token
-        const decoded = verifyToken(token) as { userId: number };
+//         // Verify the token
+//         const decoded = verifyToken(token) as { userId: number };
 
-        if (!decoded || !decoded.userId) {
-            throw new AppError('Invalid token.', 401);
-        }
+//         if (!decoded || !decoded.userId) {
+//             throw new AppError('Invalid token.', 401);
+//         }
 
-        // Fetch the user from the database
-        const user = await prisma.user.findUnique({
-            where: { id: decoded.userId }
-        });
+//         // Fetch the user from the database
+//         const user = await prisma.user.findUnique({
+//             where: { id: decoded.userId }
+//         });
 
-        if (!user) {
-            throw new AppError('User not found.', 404);
-        }
+//         if (!user) {
+//             throw new AppError('User not found.', 404);
+//         }
 
-        // Attach the user to the request object
-        req.user = user;  // Changed from req.body.user
+//         // Attach the user to the request object
+//         req.user = user;  // Changed from req.body.user
 
-        // Check admin role
-        if (!user.role?.includes("admin")) {
-            throw new AppError('Just admin can access to this endpoint.', 401);
-        }
+//         // Check admin role
+//         if (!user.role?.includes("admin")) {
+//             throw new AppError('Just admin can access to this endpoint.', 401);
+//         }
 
-        next();
-    } catch (error) {
-        next(error);
-    }
-};
+//         next();
+//     } catch (error) {
+//         next(error);
+//     }
+// };

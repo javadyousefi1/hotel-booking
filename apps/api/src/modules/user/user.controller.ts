@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { UserService } from "./user.service";
-import { AuthenticatedRequest } from "../../middlewares/auth.middleware";
+import { AuthenticatedRequest } from './../../interfaces/auth';
 
 export const UserController = {
   async getAllUsers(req: Request, res: Response, next: NextFunction) {
@@ -39,15 +39,15 @@ export const UserController = {
   async updateUser(req: AuthenticatedRequest, res: Response, next: NextFunction) {
     try {
       const { id, name } = req.body;
-      const userIdFromToken = typeof req.userData === "number" ? req.userData : 0
+      const userIdFromToken = req.userData?.id as number;
       const updateResult = await UserService.updateUser({ name, id, userIdFromToken });
 
       if (!updateResult.success) {
-        res.status(404).json({ error: updateResult.message });
+        res.status(400).json({ statusCode: res.statusCode, message: updateResult.message });
       } else {
         res.status(200).json({
           message: "User updated successfully",
-          updatedUser: { name: updateResult.updatedUser?.name, email: updateResult.updatedUser?.email, role: updateResult.updatedUser?.role, },
+          data: { name: updateResult.updatedUser?.name, email: updateResult.updatedUser?.email, role: updateResult.updatedUser?.role, },
         });
       }
 

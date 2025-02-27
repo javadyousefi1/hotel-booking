@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export interface IRegisterUserBody {
     email: string,
     password: string,
@@ -7,10 +9,14 @@ export interface IRegisterUserBody {
 
 export interface IUserModal {
     id: number,
-    name: string,
+    name?: string,
     email: string,
     password: string,
-    createdAt: string,
+    createdAt: Date,
     role: string[]
 }
 
+// Define interfaces for authenticated requests
+export interface AuthenticatedRequest extends Request {
+    userData?: IUserModal;
+}

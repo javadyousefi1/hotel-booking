@@ -25,18 +25,25 @@ export const UserService = {
 
   async updateUser(body: { id: number, name: string, userIdFromToken: number }) {
     try {
-      const isIdValid = await prisma.user.findFirst({ where: { id: body.id } })
-      console.log(body.userIdFromToken, "userIdFromToken")
-      console.log(isIdValid, "isIdValid")
+      const isIdValid = await prisma.user.findFirst({ where: { id: body.id } });
+
+      // if user id not valid
       if (!isIdValid) {
         return { success: false, message: "User id is not valid" };
       }
 
+      // if other user with an other user id send a request , can not modifier the account detail
+      if (isIdValid && body.userIdFromToken !== isIdValid.id) {
+        return { success: false, message: `Only the user with id (${body.userIdFromToken}) can change info of account` };
+      }
+
+      // update user info
       const updatedUser = await prisma.user.update({
         where: { id: body.id }, data: {
           name: body.name
         }
       });
+
       return { success: true, updatedUser };
     } catch (error: any) {
       throw error;
