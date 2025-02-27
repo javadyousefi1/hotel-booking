@@ -23,11 +23,11 @@ export const UserService = {
     }
   },
 
-  async updateUser(body: { id: number, name: string }) {
+  async updateUser(body: { id: number, name: string, userIdFromToken: number }) {
     try {
-
       const isIdValid = await prisma.user.findFirst({ where: { id: body.id } })
-
+      console.log(body.userIdFromToken, "userIdFromToken")
+      console.log(isIdValid, "isIdValid")
       if (!isIdValid) {
         return { success: false, message: "User id is not valid" };
       }
