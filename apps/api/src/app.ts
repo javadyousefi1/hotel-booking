@@ -29,11 +29,11 @@ createFolderIfNotExists(imagesPath)
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/image', imageRoutes);
+    
+// Error handling middleware (placed after routes)
+app.use(errorHandler);
 
 // Setup Swagger
 setupSwagger(app);
-
-// Error handling middleware (placed after routes)
-app.use(errorHandler);
 
 export default app;

@@ -25,5 +25,6 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 export function setupSwagger(app: Express) {
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-    console.log(`Swagger docs available at http://localhost:${process.env.PORT}/api-docs`);
+    console.log('\x1b[36mSwagger docs available at \x1b[33mhttp://localhost:' +
+        `\x1b[32m${process.env.PORT}\x1b[0m\x1b[33m/api-docs\x1b[0m 📄`);
 }

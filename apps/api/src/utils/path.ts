@@ -6,7 +6,7 @@ export function createFolderIfNotExists(folderPath: string) {
         fs.mkdirSync(folderPath, { recursive: true });
         console.log(`Folder created: ${folderPath}`);
     } else {
-        console.log(`Folder already exists: ${folderPath}`);
+        // console.log(`Folder already exists: ${folderPath}`);
     }
 }
 
