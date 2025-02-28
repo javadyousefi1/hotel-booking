@@ -48,5 +48,20 @@ export const UserService = {
     } catch (error: any) {
       throw error;
     }
+  },
+
+  async updateProfile(body: { imageId: number, userId: number }) {
+    try {
+      const { userId } = body
+      // await prisma.user.update({
+      //   where: { id: userId }, data: {
+      //     profileImageId: 2
+      //   }
+      // })
+
+      // return { success: true, updatedUser };
+    } catch (error: any) {
+      throw error;
+    }
   }
 };
