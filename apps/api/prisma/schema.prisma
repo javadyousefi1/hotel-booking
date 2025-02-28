@@ -19,7 +19,11 @@ model User {
   email     String   @unique
   password     String
   createdAt DateTime @default(now())
-  role  String[] @default(["user"]) // ✅ Default role is "user"
+  role  String[]
+
+
+  profileImage   Image?   @relation(fields: [profileImageId], references: [id]) // Defines the relation
+  profileImageId Int?     @unique
 }
 
 model Hotel {
@@ -35,4 +39,6 @@ model Image {
   path      String[]
   isUsed     Boolean @default(false) 
   createdAt DateTime @default(now())
+
+  user      User?
 }
