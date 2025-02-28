@@ -15,12 +15,11 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement())
-  name      String?
+  name      String
   email     String   @unique
   password     String
   createdAt DateTime @default(now())
   role  String[] @default(["user"]) // ✅ Default role is "user"
-
 }
 
 model Hotel {
@@ -28,5 +27,12 @@ model Hotel {
   title     String
   desc      String
   images    String[] // Array of image paths
+  createdAt DateTime @default(now())
+}
+
+model Image {
+  id        Int      @id @default(autoincrement())
+  path      String[]
+  isUsed     Boolean @default(false) 
   createdAt DateTime @default(now())
 }
