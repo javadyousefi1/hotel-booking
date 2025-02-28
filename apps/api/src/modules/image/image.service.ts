@@ -7,15 +7,18 @@ import * as fs from 'fs';
 const prisma = new PrismaClient();
 
 export const ImageService = {
-  async createImage(fileName: string) {
-    const imagePath = "/uploads/images/" + fileName
+  async createImage(fileName: string[]) {
+    const basePath = "/uploads/images/"
+    const paths = fileName.map(item => basePath + item)
     try {
-      const createdImage = await prisma.image.create({ data: { path: imagePath } })
+      const createdImage = await prisma.image.create({ data: { path: paths } })
       return { data: createdImage, success: true }
     } catch (error) {
-      const willDeletedImagePath = path.join(__dirname, "..", "..", "..", imagePath);
-      fs.unlink(willDeletedImagePath, (err) => {
-        if (err) throw err
+      paths.forEach(item => {
+        const willDeletedImagePath = path.join(__dirname, "..", "..", "..", item);
+        fs.unlink(willDeletedImagePath, (err) => {
+          if (err) throw err
+        })
       })
       throw error;
     }

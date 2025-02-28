@@ -32,7 +32,7 @@ model Hotel {
 
 model Image {
   id        Int      @id @default(autoincrement())
-  path      String
+  path      String[]
   isUsed     Boolean @default(false) 
   createdAt DateTime @default(now())
 }

@@ -12,7 +12,12 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const extension = file.originalname.split('.').pop();
     const fileName = `${Date.now()}-${Math.floor(Math.random() * 99999) + 1}.${extension}`;
-    req.body.fileName = fileName;
+    
+    if (!req.body.fileName) {
+      req.body.fileName = [fileName]
+    }else {
+      req.body.fileName.push(fileName);
+    }
     cb(null, fileName);
   }
 });
@@ -28,7 +33,7 @@ export const upload = multer({ storage, fileFilter });
 
 // Middleware to check if a file is uploaded
 export const requireFile = (req: Request, res: Response, next: NextFunction): void => {
-  if (!req.file) {
+  if (!req.file && req.files?.length === 0) {
     res.status(400).json({ message: 'Image file is required' });
     return; // Ensure we don't call next() after sending a response
   }

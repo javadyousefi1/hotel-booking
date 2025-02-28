@@ -1,28 +1,29 @@
 /**
- * @swagger
- * /image/saveImage:
- *   post:
- *     summary: Upload an image file
- *     tags: [Image]
- *     requestBody:
- *       required: true
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               file:
- *                 type: string
- *                 format: binary
- *                 description: The image file to upload
- *     responses:
- *       201:
- *         description: Image uploaded successfully
- *       400:
- *         description: Invalid request
- *       500:
- *         description: Server error
- */
+* @swagger
+* /image/saveImage:
+*   post:
+*     summary: Upload multiple image files
+*     tags: [Image]
+*     requestBody:
+*       required: true
+*       content:
+*         multipart/form-data:
+*           schema:
+*             type: object
+*             properties:
+*               file:
+*                 type: array
+*                 items:
+*                   type: string
+*                   format: binary
+*     responses:
+*       201:
+*         description: Images uploaded successfully
+*       400:
+*         description: Invalid request
+*       500:
+*         description: Server error
+*/
 
 /**
  * @swagger

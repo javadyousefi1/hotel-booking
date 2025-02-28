@@ -38,7 +38,7 @@ export const AuthController = {
 
             res.status(201).json({
                 success: true,
-                message: 'User registered successfully.',
+                message: 'User login successfully.',
                 data: { name: name, email: email }
             });
 
