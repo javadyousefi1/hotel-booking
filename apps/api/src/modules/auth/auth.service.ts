@@ -5,6 +5,7 @@ import { AppError } from "../../utils/customError";
 import bcrypt from 'bcrypt';
 import { generateToken, verifyToken } from "../../utils/jwt";
 import config from "../../constants/config";
+import { profile } from "console";
 
 const prisma = new PrismaClient();
 
@@ -85,9 +86,10 @@ export const AuthService = {
         try {
             const result = verifyToken(token)
             if (typeof result === "object" && "userId" in result) {
-                const user = await prisma.user.findUnique({ where: { id: result.userId } });
+                const user = await prisma.user.findUnique({ where: { id: result.userId }, include: { profileImage: true } });
                 if (!user) throw { message: "user not found" }
-                return { success: true, data: { name: user?.name, email: user?.email, role: user?.role } };
+                const profile = user.profileImage?.path ? user.profileImage?.path[0] : null
+                return { success: true, data: { name: user?.name, email: user?.email, role: user?.role, profile } };
             } else {
                 return { success: false }
             }

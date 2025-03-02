@@ -55,4 +55,23 @@ export const UserController = {
       next(error);
     }
   },
+
+  async updateUserProfile(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+    try {
+      const { imageId } = req.body;
+      const userId = req.userData?.id as number
+      const updateResult = await UserService.updateProfile({ imageId, userId });
+
+      if (!updateResult.success) {
+        res.status(400).json({ statusCode: res.statusCode, message: updateResult.message });
+      } else {
+        res.status(200).json({
+          message: "User updated successfully",
+        });
+      }
+
+    } catch (error) {
+      next(error);
+    }
+  },
 };
