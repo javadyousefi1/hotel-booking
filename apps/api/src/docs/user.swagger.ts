@@ -81,3 +81,24 @@
  *       400:
  *         description: Invalid request
  */
+/**
+ * @swagger
+ * /user/updateUserProfile:
+ *   put:
+ *     summary: update user profile
+ *     tags: [User]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               imageId:
+ *                 type: number
+ *     responses:
+ *       201:
+ *         description: User profile changed successfully
+ *       400:
+ *         description: Invalid request
+ */

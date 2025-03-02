@@ -87,7 +87,7 @@ export const AuthService = {
             if (typeof result === "object" && "userId" in result) {
                 const user = await prisma.user.findUnique({ where: { id: result.userId } });
                 if (!user) throw { message: "user not found" }
-                return { success: true, data: { name: user?.name, email: user?.email, role: user?.role } };
+                return { success: true, data: { name: user?.name, email: user?.email, role: user?.role, } };
             } else {
                 return { success: false }
             }

@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { paginate } from "../../utils/pagination.helper";
 import { IRegisterUserBody } from "../../interfaces/auth";
+import { AppError } from "../../utils/customError";
 
 const prisma = new PrismaClient();
 
@@ -52,14 +53,16 @@ export const UserService = {
 
   async updateProfile(body: { imageId: number, userId: number }) {
     try {
-      const { userId } = body
-      // await prisma.user.update({
-      //   where: { id: userId }, data: {
-      //     profileImageId: 2
-      //   }
-      // })
+      const { userId, imageId } = body
+      console.log({ userId, imageId })
 
-      // return { success: true, updatedUser };
+      const isImageIdValid = await prisma.image.findFirst({ where: { id: imageId } })
+
+      if (!isImageIdValid) throw new AppError('Invalid image id', 400);
+
+      const updatedUser = await prisma.user.update({ where: { id: userId }, data: { profileImageId: imageId } })
+      console.log(updatedUser, "updatedUser")
+      return { success: true, updatedUser, message: "user profile update successfully" };
     } catch (error: any) {
       throw error;
     }

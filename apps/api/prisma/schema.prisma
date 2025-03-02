@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,31 +8,22 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  password     String
-  createdAt DateTime @default(now())
-  role  String[]
+  id            Int    @id @default(autoincrement())
+  name          String
+  email         String @unique
+  password      String
+  createdAt     DateTime @default(now())
+  role          String[]
 
-
-  profileImage   Image?   @relation(fields: [profileImageId], references: [id]) // Defines the relation
-  profileImageId Int?     @unique
-}
-
-model Hotel {
-  id        Int      @id @default(autoincrement())
-  title     String
-  desc      String
-  images    String[] // Array of image paths
-  createdAt DateTime @default(now())
+  profileImage  Image?  @relation(fields: [profileImageId], references: [id])  // Correct relation
+  profileImageId Int?   @unique
 }
 
 model Image {
-  id        Int      @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   path      String[]
-  isUsed     Boolean @default(false) 
+  isUsed    Boolean @default(false) 
   createdAt DateTime @default(now())
 
-  user      User?
+  user      User?  // No need to specify `@relation` here
 }
