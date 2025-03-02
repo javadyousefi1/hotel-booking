@@ -84,7 +84,7 @@
 /**
  * @swagger
  * /user/updateUserProfile:
- *   put:
+ *   patch:
  *     summary: update user profile
  *     tags: [User]
  *     requestBody:
