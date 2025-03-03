@@ -6,6 +6,8 @@ import bcrypt from 'bcrypt';
 import { generateToken, verifyToken } from "../../utils/jwt";
 import config from "../../constants/config";
 import { profile } from "console";
+import { sendEmailVerify } from "../../utils/email";
+import { redisConnection } from "../../redis/redis";
 
 const prisma = new PrismaClient();
 
@@ -42,6 +44,12 @@ export const AuthService = {
                 const user = await prisma.user.create({
                     data: { email, password: hashedPassword, name, role: userRole },
                 });
+
+                // Generate a random 6-digit number
+                const randomSixDigit = Math.floor(Math.random() * 900000) + 100000;
+                await redisConnection.set(user.email, randomSixDigit, "EX", config.verifyCodeExp)
+                await sendEmailVerify(user.email, randomSixDigit)
+
                 // Generate JWT token
                 const token = generateToken(user.id);
 
@@ -89,7 +97,7 @@ export const AuthService = {
                 const user = await prisma.user.findUnique({ where: { id: result.userId }, include: { profileImage: true } });
                 if (!user) throw { message: "user not found" }
                 const profile = user.profileImage?.path ? user.profileImage?.path[0] : null
-                return { success: true, data: { name: user?.name, email: user?.email, role: user?.role, profile } };
+                return { success: true, data: { name: user?.name, email: user?.email, role: user?.role, profile, isVerify: user.isVerify } };
             } else {
                 return { success: false }
             }
@@ -111,6 +119,27 @@ export const AuthService = {
             if (error.code === "P2025") {
                 return { success: false, error: "User not found" };
             }
+            throw error;
+        }
+    },
+    async verifyEmail(body: { email: string, code: number }) {
+        try {
+            const { email, code } = body
+
+            const isEmailValid = await prisma.user.findFirst({ where: { email } })
+            if (!isEmailValid) return { success: false, message: "email is not valid" }
+            if (isEmailValid.isVerify) return { success: false, message: "user email already valid" }
+
+            const theValidCode = await redisConnection.get(email)
+
+            if (Number(code) === Number(theValidCode)) {
+                await prisma.user.update({ where: { email }, data: { isVerify: true } })
+                await redisConnection.del(email)
+                return { success: true, message: "user email verify" }
+            } else {
+                return { success: false, message: "the code is wrong" }
+            }
+        } catch (error: any) {
             throw error;
         }
     },

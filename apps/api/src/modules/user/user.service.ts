@@ -54,13 +54,13 @@ export const UserService = {
   async updateProfile(body: { imageId: number, userId: number }) {
     try {
       const { userId, imageId } = body
-      console.log({ userId, imageId })
 
       const isImageIdValid = await prisma.image.findFirst({ where: { id: imageId } })
 
       if (!isImageIdValid) throw new AppError('Invalid image id', 400);
 
       const updatedUser = await prisma.user.update({ where: { id: userId }, data: { profileImageId: imageId } })
+      await prisma.image.update({ where: { id: imageId }, data: { isUsed: true } })
       console.log(updatedUser, "updatedUser")
       return { success: true, updatedUser, message: "user profile update successfully" };
     } catch (error: any) {

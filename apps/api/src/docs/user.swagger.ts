@@ -63,7 +63,7 @@
  * /user/updateUser:
  *   put:
  *     summary: update user
- *     tags: [Auth]
+ *     tags: [User]
  *     requestBody:
  *       required: true
  *       content:

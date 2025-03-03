@@ -26,6 +26,7 @@
  *         description: Invalid request
  */
 
+
 /**
  * @swagger
  * /auth/login:
@@ -49,18 +50,7 @@
  *       400:
  *         description: Invalid request
  */
-/**
- * @swagger
- * /auth/checkAuth:
- *   get:
- *     summary: get current user info
- *     tags: [Auth]
- *     responses:
- *       201:
- *         description: User login successfully
- *       400:
- *         description: Invalid request
- */
+
 /**
  * @swagger
  * /auth/log-out:
@@ -74,3 +64,39 @@
  *         description: Invalid request
  */
 /**
+ * @swagger
+ * /auth/verifyEmail:
+ *   patch:
+ *     summary: Register a new user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               code:
+ *                 type: number
+ *     responses:
+ *       201:
+ *         description: User verify successfully
+ *       400:
+ *         description: Invalid request
+ */
+
+/**
+/**
+ * @swagger
+ * /auth/checkAuth:
+ *   get:
+ *     summary: get current user info
+ *     tags: [Auth]
+ *     responses:
+ *       201:
+ *         description: User login successfully
+ *       400:
+ *         description: Invalid request
+ */
