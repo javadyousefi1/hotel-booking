@@ -4,7 +4,8 @@ const config = Object.freeze({
     userRoles: {
         USER: "user",
         HOST: "host"
-    }
+    },
+    verifyCodeExp: 86_400
 })
 
 export default config

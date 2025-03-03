@@ -47,7 +47,7 @@ export const AuthService = {
 
                 // Generate a random 6-digit number
                 const randomSixDigit = Math.floor(Math.random() * 900000) + 100000;
-                await redisConnection.set(user.email, randomSixDigit, "EX", 86400)
+                await redisConnection.set(user.email, randomSixDigit, "EX", config.verifyCodeExp)
                 await sendEmailVerify(user.email, randomSixDigit)
 
                 // Generate JWT token

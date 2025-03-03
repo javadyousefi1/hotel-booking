@@ -25,6 +25,44 @@
  *       400:
  *         description: Invalid request
  */
+
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: login for user
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: User login successfully
+ *       400:
+ *         description: Invalid request
+ */
+
+/**
+ * @swagger
+ * /auth/log-out:
+ *   post:
+ *     summary: logout user
+ *     tags: [Auth]
+ *     responses:
+ *       201:
+ *         description: User logout successfully
+ *       400:
+ *         description: Invalid request
+ */
 /**
  * @swagger
  * /auth/verifyEmail:
@@ -50,28 +88,6 @@
  */
 
 /**
- * @swagger
- * /auth/login:
- *   post:
- *     summary: login for user
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *     responses:
- *       201:
- *         description: User login successfully
- *       400:
- *         description: Invalid request
- */
 /**
  * @swagger
  * /auth/checkAuth:
@@ -84,16 +100,3 @@
  *       400:
  *         description: Invalid request
  */
-/**
- * @swagger
- * /auth/log-out:
- *   post:
- *     summary: logout user
- *     tags: [Auth]
- *     responses:
- *       201:
- *         description: User logout successfully
- *       400:
- *         description: Invalid request
- */
-/**
