@@ -35,6 +35,10 @@ app.use('/image', imageRoutes);
 // Error handling middleware (placed after routes)
 app.use(errorHandler);
 
+// serve file
+app.use("/uploads", express.static("uploads"));
+
+
 // Setup Swagger
 setupSwagger(app);
 
