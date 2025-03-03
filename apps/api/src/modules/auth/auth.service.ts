@@ -97,7 +97,7 @@ export const AuthService = {
                 const user = await prisma.user.findUnique({ where: { id: result.userId }, include: { profileImage: true } });
                 if (!user) throw { message: "user not found" }
                 const profile = user.profileImage?.path ? user.profileImage?.path[0] : null
-                return { success: true, data: { name: user?.name, email: user?.email, role: user?.role, profile } };
+                return { success: true, data: { name: user?.name, email: user?.email, role: user?.role, profile, isVerify: user.isVerify } };
             } else {
                 return { success: false }
             }
