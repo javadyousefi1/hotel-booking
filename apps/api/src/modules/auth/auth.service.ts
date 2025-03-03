@@ -122,4 +122,25 @@ export const AuthService = {
             throw error;
         }
     },
+    async verifyEmail(body: { email: string, code: number }) {
+        try {
+            const { email, code } = body
+
+            const isEmailValid = await prisma.user.findFirst({ where: { email } })
+            if (!isEmailValid) return { success: false, message: "email is not valid" }
+            if (isEmailValid.isVerify) return { success: false, message: "user email already valid" }
+
+            const theValidCode = await redisConnection.get(email)
+
+            if (Number(code) === Number(theValidCode)) {
+                await prisma.user.update({ where: { email }, data: { isVerify: true } })
+                await redisConnection.del(email)
+                return { success: true, message: "user email verify" }
+            } else {
+                return { success: false, message: "the code is wrong" }
+            }
+        } catch (error: any) {
+            throw error;
+        }
+    },
 };

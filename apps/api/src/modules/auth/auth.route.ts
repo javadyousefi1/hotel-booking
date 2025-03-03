@@ -13,5 +13,5 @@ router.post('/log-out', AuthController.logOutUser);
 // router.post('/changeUserRole', checkIsAdminMiddleware, changeUserRole)
 // Protected route
 router.get('/checkAuth', AuthController.getUserInfo);
-
+router.patch('/verifyEmail', authenticate, AuthController.verifyUserEmail)
 export default router;
