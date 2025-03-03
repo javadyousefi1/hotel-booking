@@ -9,7 +9,7 @@ import { errorHandler } from './middlewares/error.middleware';
 import { setupSwagger } from './swagger';
 import { createFolderIfNotExists } from './utils/path';
 import path from 'path';
-import Redis from "ioredis";
+import { redisConnection, } from './redis/redis';
 
 const uploadsPath = path.join(path.join(__dirname, '..'), 'uploads');
 const imagesPath = path.join(uploadsPath, 'images');
@@ -22,19 +22,11 @@ app.use(cors({ credentials: true, origin: process.env.ALLOW_CORS_ORIGIN }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser());
+// Test Redis connection
+redisConnection.ping().then((res) => console.log("Redis Connected:", res));
 
 createFolderIfNotExists(uploadsPath)
 createFolderIfNotExists(imagesPath)
-
-const redis = new Redis({
-    host: "194.5.207.248", // Default Redis host
-    port: 6379, // Default Redis port
-    password: "javad2335", // Add if Redis requires authentication
-});
-
-// Test Redis connection
-redis.ping().then((res) => console.log("Redis Connected:", res));
-
 
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);

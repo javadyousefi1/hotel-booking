@@ -6,6 +6,8 @@ import bcrypt from 'bcrypt';
 import { generateToken, verifyToken } from "../../utils/jwt";
 import config from "../../constants/config";
 import { profile } from "console";
+import { sendEmailVerify } from "../../utils/email";
+import { redisConnection } from "../../redis/redis";
 
 const prisma = new PrismaClient();
 
@@ -42,6 +44,12 @@ export const AuthService = {
                 const user = await prisma.user.create({
                     data: { email, password: hashedPassword, name, role: userRole },
                 });
+
+                // Generate a random 6-digit number
+                const randomSixDigit = Math.floor(Math.random() * 900000) + 100000;
+                await redisConnection.set(user.email, randomSixDigit, "EX", 86400)
+                await sendEmailVerify(user.email, randomSixDigit)
+
                 // Generate JWT token
                 const token = generateToken(user.id);
 
